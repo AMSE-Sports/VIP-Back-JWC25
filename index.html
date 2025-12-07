@@ -29,8 +29,14 @@
       color:#111827;
     }
 
+    /* ====== NEW: Header banner ====== */
+    .header img {
+      width:100%;
+      display:block;
+    }
+
     .page {
-      min-height:100vh;
+      min-height:calc(100vh - 200px); /* กันไม่ให้สูงเกินเมื่อมี header */
       display:flex;
       align-items:center;
       justify-content:center;
@@ -236,61 +242,67 @@
   </style>
 </head>
 <body>
-<div class="page">
-  <div class="card">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      <span>VIP List • Internal Staff Only</span>
-    </div>
 
-    <h1 class="title">VIP Upload Form</h1>
-    <p class="subtitle">
-      ฟอร์มสำหรับทีมงานในการอัพโหลดรายชื่อ VIP และรูปภาพประกอบการยืนยันตัวตน
-    </p>
-
-    <form id="vip-upload-form">
-      <div class="section-title">ข้อมูล VIP</div>
-
-      <div class="field">
-        <label for="full_name">ชื่อ–นามสกุล VIP (ผู้รับหลัก / ผู้รับเดี่ยว) <span class="required">*</span></label>
-        <input id="full_name" name="full_name" type="text" required placeholder="เช่น Mr. John Doe">
-      </div>
-
-      <div class="field">
-        <label for="organization">ชื่อหน่วยงาน / องค์กร <span class="required">*</span></label>
-        <input id="organization" name="organization" type="text" required placeholder="เช่น ABC Company Limited">
-      </div>
-
-      <div class="field">
-        <label for="ticket_count">จำนวนบัตรที่ออก <span class="required">*</span></label>
-        <input id="ticket_count" name="ticket_count" type="number" min="1" required placeholder="เช่น 2">
-      </div>
-
-      <div class="field">
-        <label for="photo">รูปภาพ VIP สำหรับใช้ยืนยันตัวตนหน้างาน <span class="required">*</span></label>
-        <div class="hint">รองรับไฟล์ .jpg / .png ขนาดไม่เกิน ~5MB</div>
-        <input id="photo" name="photo" type="file" accept="image/*" class="file-input" required>
-        <div class="preview" id="photo-preview" style="display:none;">
-          <img id="photo-preview-img" alt="Preview">
-          <span id="photo-preview-name"></span>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button type="button" class="btn-outline" id="btn-reset">ล้างข้อมูล</button>
-        <button type="submit" class="btn-primary" id="btn-submit">
-          <span id="btn-submit-text">บันทึก VIP</span>
-          <span id="btn-submit-loading" style="display:none;">กำลังบันทึก...</span>
-        </button>
-      </div>
-
-      <div id="status-container"></div>
-    </form>
+  <!-- NEW: Header Banner -->
+  <div class="header">
+    <!-- เปลี่ยนชื่อไฟล์ได้ตามจริง เช่น "vip-header.png" -->
+    <img src="Header.png" alt="Thai Airways International WGP#1 Waterjet World Cup 2025">
   </div>
-</div>
+
+  <div class="page">
+    <div class="card">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>VIP List • Internal Staff Only</span>
+      </div>
+
+      <h1 class="title">VIP Upload Form</h1>
+      <p class="subtitle">
+        ฟอร์มสำหรับทีมงานในการอัพโหลดรายชื่อ VIP และรูปภาพประกอบการยืนยันตัวตน
+      </p>
+
+      <form id="vip-upload-form">
+        <div class="section-title">ข้อมูล VIP</div>
+
+        <div class="field">
+          <label for="full_name">ชื่อ–นามสกุล VIP (ผู้รับหลัก / ผู้รับเดี่ยว) <span class="required">*</span></label>
+          <input id="full_name" name="full_name" type="text" required placeholder="เช่น Mr. John Doe">
+        </div>
+
+        <div class="field">
+          <label for="organization">ชื่อหน่วยงาน / องค์กร <span class="required">*</span></label>
+          <input id="organization" name="organization" type="text" required placeholder="เช่น ABC Company Limited">
+        </div>
+
+        <div class="field">
+          <label for="ticket_count">จำนวนบัตรที่ออก <span class="required">*</span></label>
+          <input id="ticket_count" name="ticket_count" type="number" min="1" required placeholder="เช่น 2">
+        </div>
+
+        <div class="field">
+          <label for="photo">รูปภาพ VIP สำหรับใช้ยืนยันตัวตนหน้างาน <span class="required">*</span></label>
+          <div class="hint">รองรับไฟล์ .jpg / .png ขนาดไม่เกิน ~5MB</div>
+          <input id="photo" name="photo" type="file" accept="image/*" class="file-input" required>
+          <div class="preview" id="photo-preview" style="display:none;">
+            <img id="photo-preview-img" alt="Preview">
+            <span id="photo-preview-name"></span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-outline" id="btn-reset">ล้างข้อมูล</button>
+          <button type="submit" class="btn-primary" id="btn-submit">
+            <span id="btn-submit-text">บันทึก VIP</span>
+            <span id="btn-submit-loading" style="display:none;">กำลังบันทึก...</span>
+          </button>
+        </div>
+
+        <div id="status-container"></div>
+      </form>
+    </div>
+  </div>
 
 <script>
-  // TODO: แทนที่ด้วยข้อมูลโปรเจกต์จริงของคุณ
   const SUPABASE_URL = "https://mhecpnqwwxspxfhdvzsc.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZWNwbnF3d3hzcHhmaGR2enNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDc0MjEsImV4cCI6MjA3ODU4MzQyMX0.ONaEMqU6BHuMSywE3Yvtbj78NqBbecI18amsD18Cgnc";
   const VIP_BUCKET = "vip_photos"; // สร้าง bucket นี้ใน Supabase Storage
@@ -372,12 +384,10 @@
     setSubmitting(true);
 
     try {
-      // สร้างชื่อไฟล์ใน bucket (กันชนกันด้วย timestamp)
       const safeName = fullName.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_\-]/g, "");
       const ext = file.name.split(".").pop();
       const filePath = `vip_${safeName}_${Date.now()}.${ext}`;
 
-      // อัพโหลดรูปไปที่ Storage
       const { error: uploadError } = await supabaseClient
         .storage
         .from(VIP_BUCKET)
@@ -393,7 +403,6 @@
         return;
       }
 
-      // เอา public URL ของรูป
       const { data: publicUrlData } = supabaseClient
         .storage
         .from(VIP_BUCKET)
@@ -401,7 +410,6 @@
 
       const photoUrl = publicUrlData?.publicUrl || null;
 
-      // บันทึกข้อมูลลงตาราง vip_guests
       const payload = {
         full_name: fullName,
         organization: organization,
